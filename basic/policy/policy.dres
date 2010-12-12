@@ -1,0 +1,394 @@
+# -*-makefile-*-
+PREFIX = com.nokia.policy
+
+# resource
+$resource_owner  = {resource: headset_buttons, owner: nobody, mode: shared, \
+                    group   : nobody }
+$resource_owner  = {resource: lens_cover,      owner: nobody, mode: shared, \
+                    group   : nobody }
+$resource_owner += {resource: snap_button,     owner: nobody, mode: shared, \
+                    group   : nobody }
+$resource_owner += {resource: scale_button,    owner: nobody, mode: shared, \
+                    group   : nobody }
+$resource_owner += {resource: lock_button,     owner: nobody, mode: shared, \
+                    group   : nobody }
+$resource_owner += {resource: system_button,   owner: nobody, mode: shared, \
+                    group   : nobody }
+$resource_owner += {resource: backlight,       owner: nobody, mode: shared, \
+                    group   : nobody }
+$resource_owner += {resource: leds,            owner: nobody, mode: shared, \
+                    group   : nobody }
+$resource_owner += {resource: vibra,           owner: nobody, mode: shared, \
+                    group   : nobody }
+$resource_owner += {resource: video_recording, owner: nobody, mode: shared, \
+                    group   : nobody }
+$resource_owner += {resource: audio_recording, owner: nobody, mode: shared, \
+                    group   : nobody }
+$resource_owner += {resource: video_playback , owner: nobody, mode: shared, \
+                    group   : nobody }
+$resource_owner += {resource: audio_playback , owner: nobody, mode: shared, \
+                    group   : nobody }
+
+$resource_set = {manager_id:0,  client_name:dres, client_id:0, class:fake,    \
+                 mode:0, mandatory:0, optional:0, shared:0, mask:0, granted:0,\
+                 advice:0, request:release, block:0, reqno:0, audiogr:fake}
+
+
+# video devices
+$video_device_accessible  = { name: tvout          , connected: 0 }
+$video_device_accessible += { name: builtin        , connected: 1 }
+
+$video_device_selectable  = { name: builtinandtvout, selectable: 0 }
+$video_device_selectable += { name: tvout          , selectable: 0 }
+$video_device_selectable += { name: builtin        , selectable: 1 }
+
+# video routing
+$video_route = { device: builtin, tvstandard: pal, aspectratio: normal }
+
+# audio devices
+$audio_device_accessible  = { name: null         , driver: 1, connected: 1 }
+$audio_device_accessible += { name: ihf          , driver: 1, connected: 1 }
+$audio_device_accessible += { name: microphone   , driver: 1, connected: 1 }
+$audio_device_accessible += { name: earpiece     , driver: 1, connected: 1 }
+$audio_device_accessible += { name: hac          , driver: 1, connected: 0 }
+$audio_device_accessible += { name: tvout        , driver: 1, connected: 0 }
+$audio_device_accessible += { name: headmike     , driver: 1, connected: 0 }
+$audio_device_accessible += { name: headphone    , driver: 1, connected: 0 }
+$audio_device_accessible += { name: headset      , driver: 1, connected: 0 }
+$audio_device_accessible += { name: bthsp        , driver: 0, connected: 0 }
+$audio_device_accessible += { name: bta2dp       , driver: 0, connected: 0 }
+
+$audio_device_selectable  = { name: null            , selectable: 1 }
+$audio_device_selectable += { name: ihf             , selectable: 1 }
+$audio_device_selectable += { name: microphone      , selectable: 1 }
+$audio_device_selectable += { name: earpiece        , selectable: 1 }
+$audio_device_selectable += { name: hac             , selectable: 0 }
+$audio_device_selectable += { name: earpieceandtvout, selectable: 0 }
+$audio_device_selectable += { name: hacandtvout     , selectable: 0 }
+$audio_device_selectable += { name: tvout           , selectable: 0 }
+$audio_device_selectable += { name: ihfandtvout     , selectable: 0 }
+$audio_device_selectable += { name: headmike        , selectable: 0 }
+$audio_device_selectable += { name: headphone       , selectable: 0 }
+$audio_device_selectable += { name: headset         , selectable: 0 }
+$audio_device_selectable += { name: bthsp           , selectable: 0 }
+$audio_device_selectable += { name: bta2dp          , selectable: 0 }
+$audio_device_selectable += { name: tvoutandbthsp   , selectable: 0 }
+$audio_device_selectable += { name: tvoutandbta2dp  , selectable: 0 }
+
+
+# audio modes for ECI detection
+$audio_mode  = { device: null            , default: null          }
+$audio_mode += { device: ihf             , default: ihf           }
+$audio_mode += { device: earpiece        , default: hp            }
+$audio_mode += { device: hac             , default: hp            }
+$audio_mode += { device: earpieceandtvout, default: hp            }
+$audio_mode += { device: hacandtvout     , default: hp            }
+$audio_mode += { device: tvout           , default: lineout       }
+$audio_mode += { device: ihfandtvout     , default:'ihfandtv-out' }
+$audio_mode += { device: headphone       , default: lineout       ,   \
+                                           eci:     eci           }
+$audio_mode += { device: headset         , default: hs            ,   \
+                                           eci:     eci           }
+$audio_mode += { device: bthsp           , default: btmono        }
+$audio_mode += { device: bta2dp          , default: bta2dp        }
+$audio_mode += { device: tvoutandbthsp   , default: btmono        }
+$audio_mode += { device: tvoutandbta2dp  , default: bta2dp        }
+
+
+# audio output configuration
+$audio_output_configuration  = { device: null           , mode: null         ,\
+			         hwid:na}
+$audio_output_configuration += { device: ihf            , mode: ihf          ,\
+			         hwid:na}
+$audio_output_configuration += { device: earpiece       , mode: hp           ,\
+			         hwid:na} 
+$audio_output_configuration += { device: hac            , mode: hp           ,\
+			         hwid:na}
+$audio_output_configuration += { device: earpieceandtvout,mode: hp           ,\
+			         hwid:na}
+$audio_output_configuration += { device: hacandtvout    , mode: hp           ,\
+			         hwid:na}
+$audio_output_configuration += { device: tvout          , mode: lineout      ,\
+			         hwid:na}
+$audio_output_configuration += { device: ihfandtvout    , mode:'ihfandtv-out',\
+			         hwid:na}
+$audio_output_configuration += { device: headphone      , mode: lineout      ,\
+			         hwid:na}
+$audio_output_configuration += { device: headset        , mode: hs           ,\
+			         hwid:na}
+$audio_output_configuration += { device: bthsp          , mode: btmono       ,\
+			         hwid:na }
+$audio_output_configuration += { device: bta2dp         , mode: bta2dp       ,\
+			         hwid:na}
+$audio_output_configuration += { device: tvoutandbthsp  , mode: btmono       ,\
+			         hwid:na}
+$audio_output_configuration += { device: tvoutandbta2dp , mode: bta2dp       ,\
+			         hwid:na}
+
+$privacy = { stage: previous, value: public }
+$privacy = { stage: current , value: public }
+ 
+# audio routing
+$audio_route  = { type: source, device: microphone, mode: na , hwid: na }
+$audio_route += { type: sink  , device: ihf       , mode: ihf, hwid: na }
+
+# volume limits
+$volume_limit  = { group: idle       , limit: 100 }
+$volume_limit += { group: background , limit: 100 }
+$volume_limit += { group: inputsound , limit: 100 }
+$volume_limit += { group: systemsound, limit: 100 }
+$volume_limit += { group: event      , limit: 100 }
+$volume_limit += { group: othermedia , limit: 100 }
+$volume_limit += { group: flash      , limit: 100 }
+$volume_limit += { group: player     , limit: 100 }
+$volume_limit += { group: game       , limit: 100 }
+$volume_limit += { group: alarm      , limit: 100 }
+$volume_limit += { group: ringtone   , limit: 100 }
+$volume_limit += { group: camera     , limit: 100 }
+$volume_limit += { group: videoeditor, limit: 100 }
+$volume_limit += { group: call       , limit: 100 }
+$volume_limit += { group: navigator  , limit: 100 }
+$volume_limit += { group: cstone     , limit: 100 }
+$volume_limit += { group: nonsilent  , limit: 100 }
+$volume_limit += { group: alwayson   , limit: 100 }
+
+# audio corking
+$audio_cork  = { group: idle       , cork: uncorked }
+$audio_cork += { group: background , cork: uncorked }
+$audio_cork += { group: systemsound, cork: uncorked }
+$audio_cork += { group: inputsound , cork: uncorked }
+$audio_cork += { group: event      , cork: uncorked }
+$audio_cork += { group: alarm      , cork: uncorked }
+$audio_cork += { group: othermedia , cork: uncorked }
+$audio_cork += { group: flash      , cork: uncorked }
+$audio_cork += { group: player     , cork: uncorked }
+$audio_cork += { group: game       , cork: uncorked }
+$audio_cork += { group: ringtone   , cork: uncorked }
+$audio_cork += { group: camera     , cork: uncorked }
+$audio_cork += { group: videoeditor, cork: uncorked }
+$audio_cork += { group: call       , cork: uncorked }
+$audio_cork += { group: navigator  , cork: uncorked }
+$audio_cork += { group: cstone     , cork: uncorked }
+$audio_cork += { group: nonsilent  , cork: uncorked }
+$audio_cork += { group: alwayson   , cork: uncorked }
+
+# muting
+$audio_mute    = { device: microphone    , mute: unmuted }
+$audio_mute   += { device: headmike      , mute: unmuted }
+$audio_mute   += { device: headset       , mute: unmuted }
+$audio_mute   += { device: bthsp         , mute: unmuted }
+$audio_mute   += { device: tvoutandbthsp , mute: unmuted }
+
+# vibra control
+$vibra_mute  = { group: other, mute: unmuted }
+$vibra_mute += { group: game , mute: unmuted }
+$vibra_mute += { group: ui   , mute: unmuted }
+$vibra_mute += { group: event, mute: unmuted }
+
+# backlight control
+$backlight   = { state: off }
+
+# contexts
+$context   = { variable: call           ,  value: inactive }
+$context   = { variable: call_audio_type,  value: none     }
+$context   = { variable: camera         ,  value: inactive }
+
+# sensors
+$proximity = { state: 'unknown' }
+
+# misc
+$mute  = { value: 0 }
+
+
+#
+# we always need at least one enforcement point
+# (workaround for a resolver factstore tracking buglet/feature...)
+# 
+$enforcement_point = { id: 'ohmd', type: 'internal', name: 'ohmd' }
+
+# policy plugin states, and resolver blocking
+$plugin   = { name: 'ohmd', type: 'policy', state: 'ready' }
+$resolver = { blocked: 0 }
+
+# internally used variables
+$completion_handler_called = { value: no }
+
+all: plugin_check video_route audio_route audio_volume audio_cork audio_mute \
+     $vibra_mute $backlight $enforcement_point
+	if !$resolver:blocked then
+	    #echo('*** all ***')
+	    $completion_handler_called:value = no
+	    resolve(actions, &completion_callback=&completion_callback, \
+                    &transaction_id=&transaction_id)
+	    #if $completion_handler_called:value == 'no' then
+	    #	delay_execution(0, 'completion', &completion_callback, \
+	    #    	            &transaction_id, 1)
+	    #end
+	end
+
+
+video_route: $video_device_selectable $gconf
+	$video_route = prolog(set_video_routes)
+
+audio_route: $audio_device_selectable $audio_output_configuration \
+             $resource_owner
+	$privacy[stage]    |= prolog(set_audio_privacy, previous)
+	$audio_route[type] |= prolog(set_audio_routes)
+	$privacy[stage]    |= prolog(set_audio_privacy, current)
+	if $privacy[stage:previous]:value == 'private' && \
+	   $privacy[stage:current]:value  == 'public'     \
+	then
+	    #echo('*** stop players ***')
+	    $resource_set[manager_id] |= prolog(force_resource_release, \
+	                               	        player, player)
+	end
+
+audio_volume: $resource_owner $resource_set
+	$volume_limit[group] |= prolog(set_volume_limits)
+
+audio_cork: $resource_owner
+	$audio_cork[group] |= prolog(set_corks)
+
+audio_mute: $mute
+	$audio_mute[device] |= prolog(set_mute)
+
+actions: audio_actions video_actions vibra_actions backlight_actions
+
+audio_actions: $audio_mute $audio_cork $volume_limit $context $audio_route \
+               $enforcement_point
+	#echo('*** audio_actions ***')
+	signal_changed(audio_actions, &completion_callback, &transaction_id, \
+	               'com.nokia.policy.audio_route', \
+                       'com.nokia.policy.context', \
+                       'com.nokia.policy.volume_limit', \
+                       'com.nokia.policy.audio_cork', \
+		       'com.nokia.policy.audio_mute')
+	$completion_handler_called:value = yes
+
+video_actions: $video_route $enforcement_point
+	#echo('*** video_actions ***')
+	signal_changed(video_actions, '', 0, \
+	               'com.nokia.policy.video_route')
+
+vibra_actions: $vibra_mute
+	#echo('*** vibra_actions ***')
+	signal_changed(vibra_actions, '', 0, \
+		       'com.nokia.policy.vibra_mute')
+
+backlight_actions: $backlight
+	#echo('*** backlight_actions ***')
+	signal_changed(backlight_actions, '', 0, \
+		       'com.nokia.policy.backlight')
+
+resource_request:
+	echo('*** resource_request: ', &request, ' ', &manager_id)
+	$resource_set[manager_id] |= prolog(update_resource_entries)
+	$resource_owner[resource] |= prolog(update_resource_owner_entries)
+	resolve(all)
+
+
+accessory_request:
+	$audio_device_accessible[name] = prolog(update_accessible_audio_entry,\
+	                                        &accessory_name, \
+					        &accessory_driver, \
+					        &accessory_connected)
+	$audio_device_selectable[name] = prolog(update_selectable_audio_entry,\
+	                                        &accessory_name, \
+						&accessory_driver, \
+						&accessory_connected)
+	$video_device_accessible[name] = prolog(update_accessible_video_entry,\
+	                                        &accessory_name, \
+						&accessory_connected)
+	$video_device_selectable[name] = prolog(update_selectable_video_entry,\
+	                                        &accessory_name, \
+						&accessory_connected)
+	resolve(all, '', 0)
+
+update_accessory_mode:
+	$audio_output_configuration[device] |= prolog(update_accessory_mode, \
+					 	      &accessory_name,       \
+						      &accessory_mode)
+
+telephony_request:
+	#$call_action = prolog(call_request, &call_id, &call_state)
+
+telephony_audio_update:
+
+#
+# application_request
+#
+active_ui_change_request:
+	echo('*** active_ui_change_request appwin=', &appwin, \
+                  ' pid=', &pid , ' iconize=', &iconize, ' ***')
+
+# Bluetooth HSP state machine hooks
+
+# Bluetooth HSP goes from connected to playing state
+
+bthsp_start_audio:
+	$audio_output_configuration[device:bthsp]:hwid = &hwid
+	$audio_output_configuration[device:ihfandbthsp]:hwid = &hwid
+	$audio_output_configuration[device:tvoutandbthsp]:hwid = &hwid
+
+# Bluetooth HSP goes from playing to connected state, check if we should
+# set up the bluetooth override (transfer audio back to device).
+
+bthsp_stop_audio:
+	# echo('bthsp_stop_audio')
+
+bthsp_disconnect:
+	# unset the HSP/HFP flag
+	$audio_output_configuration[device:bthsp]:hwid = na
+	$audio_output_configuration[device:ihfandbthsp]:hwid = na
+	$audio_output_configuration[device:tvoutandbthsp]:hwid = na
+
+bthsp_connect:
+
+
+
+# first call hook
+telephony_first_call_hook:
+	#$mode[foo] = prolog(update_mode, telephony)
+
+# last call hook
+telephony_last_call_hook: 
+	#$mode[foo] = prolog(update_mode)
+	# resolve(all, '', 0)
+
+# call start hook: workaround for tonegen bad audio quality at call start
+telephony_call_start_hook:
+
+# call end hook
+telephony_call_end_hook:
+
+
+# call connect hook (call locally accepted)
+telephony_call_connect_hook:
+
+# call onhold hook
+telephony_call_onhold_hook:
+
+# call offhold hook
+telephony_call_offhold_hook:
+
+# call active hook (call remotely accepted)
+telephony_call_active_hook:
+
+# dialstring sending started
+telephony_sending_dialstring:
+
+# dialstring sending stopped
+telephony_stopped_dialstring:
+
+
+# block resolving if any policy plugin is not ready
+plugin_check: $plugin
+	if $plugin[type:policy, state:!ready] then
+	    $resolver:blocked = 1
+	else
+	    $resolver:blocked = 0
+	end
+
+# forcibly intern 'rule' (alias for 'prolog') into the symbol table
+__alias_prolog:
+	rule(foo, bar)

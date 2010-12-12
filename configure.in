@@ -1,0 +1,71 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ(2.52)
+AC_INIT(policy-settings, 0.0.1)
+AC_CONFIG_SRCDIR(test)
+AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+AC_CONFIG_HEADERS(dummy.h)
+
+VERSION_MAJOR=0
+VERSION_MINOR=0
+VERSION_PATCH=1
+AC_SUBST(VERSION_MAJOR)
+AC_SUBST(VERSION_MINOR)
+AC_SUBST(VERSION_PATCH)
+
+# Checks for programs.
+
+# SWI Prolog
+AC_ARG_VAR(PLC, path to pl or swipl, the SWI Prolog compiler)
+AC_ARG_WITH(prolog, [  --with-prolog=<SWI prolog binary>   where the SWI prolog main binary is installed])
+
+if test -z "$with_prolog" ; then
+  AC_CHECK_PROG(PLC, pl, pl)
+  if test -z "$PLC" ; then
+    AC_CHECK_PROG(PLC, swipl, swipl)
+  fi
+else
+  AC_MSG_CHECKING([SWI Prolog])
+  PLC="$with_prolog"
+  AC_MSG_RESULT($PLC)
+fi
+
+if test -z "$PLC" ; then
+  AC_MSG_ERROR(SWI Prolog not found)
+fi
+AC_SUBST(PLC)
+
+# DRES compiler.
+AC_ARG_VAR(DRESC, [path to dresc (DRES compiler)])
+AC_ARG_WITH(dresc, [  --with-dresc=<path to dresc>   where the dresc binary is installed])
+
+if test -z "$with_dresc" ; then
+  AC_CHECK_PROG(DRESC, dresc, dresc)
+else
+  AC_MSG_CHECKING([DRES compiler])
+  DRESC="$with_dresc"
+  AC_MSG_RESULT($DRESC)
+fi
+
+if test -z "$DRESC" ; then
+  AC_MSG_ERROR(dresc not found)
+fi
+AC_SUBST(DRESC)
+
+# Checks for libraries.
+
+# Checks for header files.
+
+# Checks for typedefs, structures, and compiler characteristics.
+
+# Checks for library functions.
+
+AC_OUTPUT([Makefile
+           basic/Makefile
+           basic/policy/Makefile
+           basic/etc/Makefile
+           basic/etc/pulse/Makefile
+           basic/etc/ohm/Makefile
+])
+

@@ -1,0 +1,143 @@
+% A small prolog snippet to catch (pre-)compilation errors and stop the
+% compilation with a non-zero error code.
+
+% Usage: $(PL) -t <command> -s thisfile -- [-v] -c <inputs> -o <output>
+%
+% The possible commands are:
+%   - precompile: precompile the given inputs to output
+%   - syntax_check: only check the syntax of the given input files
+%
+% Use the -v flag to turn the interpreters verbose flag on.
+%
+% For example:
+% $(PL) -t precompile -s plc -- -v \
+%     -c policy.pl /usr/share/libprolog/libprolog.pl \
+%     -o policy.plc
+%
+% Good luck...
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Some basic ideas about the implementation:
+% 
+% We override the interpreters basic error hook. We both print an error
+% message and exit with non-zero exit status upon (syntax) errors. If we
+% are being invoked from make(1), this will cause it to exit with an error.
+%
+% This is a much better idea than the default behaviour of ignoring the
+% error and generating a randomly broken precompiled file which in the
+% worst (= usual) case causes endless hours of frantic debugging and the
+% chasing of nonexisting errors.
+%
+% The easiest would be to simply
+%      current_stream(2, write, Stream),
+%      print_message_lines(Stream, 'ERROR: ', Lines), halt(1).
+%
+% This would produce identical error messages to the prolog interpreter.
+% However it would also pull in print_message_lines and all the predicates
+% it uses which translates to an extra 6K in saved state and some more in
+% memory usage. In the spirit of "Guys, guys... be more careful." now we
+% simply output the error term now. If this turns out to be unbearably
+% user-unfriendly we'll change it to use print_message_lines instead.
+%
+
+:-dynamic user:message_hook/3.
+:-multifile user:message_hook/3.
+
+user:message_hook(Term, error, _Lines) :-
+    ((Term = error(E, file(Path, Line, _LinePos, _CharPos)),
+      writef('ERROR: %w\n', [E]),
+      writef('  in file %w\n', [Path]),
+      writef('  detected on line %w\n', [Line]))
+        ;
+      writef('ERROR: %w\n', [Term])),
+    !, halt(1).
+
+
+%
+% Parse the command line for -c Inputs -o Output.
+%
+
+parse_command_line(Inputs, Output) :-
+    current_prolog_flag(argv, Argv),
+    discard_till('--', Argv, Args),
+    parse_command_line_(Args, none, Inputs, [], Output, []).
+
+parse_command_line_([], _, [], [], [], []).
+parse_command_line_([], _, InAcc, InAcc, OutAcc, OutAcc).
+parse_command_line_([Arg|Argv], Switch, Inputs, InAcc, Output, OutAcc) :-
+    % verbose command line switch
+    (Arg == '-v',
+    %   writef('  * verbose mode\n'),
+        set_prolog_flag(verbose, true),
+        parse_command_line_(Argv, Switch, Inputs, InAcc, Output, OutAcc), !) ;
+    % input file command line switch
+    (Arg == '-c',
+    %   writef('  * sources following\n'),
+        parse_command_line_(Argv, '-c', Inputs, InAcc, Output, OutAcc), !) ;
+    % output file command line switch
+    (Arg == '-o',
+    %   writef('  * output following\n'),
+        parse_command_line_(Argv, '-o', Inputs, InAcc, Output, OutAcc), !) ;
+    % more input files
+    (Switch == '-c',
+    %   writef('  * source %w\n', [Arg]),
+        append(InAcc, [Arg], NewInAcc),
+        parse_command_line_(Argv, '-c', Inputs, NewInAcc, Output, OutAcc), !) ;
+    % output file (can be only one)
+    (Switch == '-o',
+    %   writef('  * output %w\n', [Arg]),
+        (ground(Output),
+	    writeln('ERROR: cannot have more than 1 output file.'), halt(1)) ;
+        parse_command_line_(Argv, '-o', Inputs, InAcc, Output, Arg), !).
+
+discard_till(Sep, [Sep|Args], Args).
+discard_till(Sep, [_|Argv], Args) :-
+    discard_till(Sep, Argv, Args).
+    
+
+%
+% Load the list of given input files.
+%
+
+consult_inputs([]).
+consult_inputs([File|More]) :-
+    writef('* Loading input file \'%w\'...\n', [File]),
+    consult(File),
+    consult_inputs(More).
+
+
+%
+% Parse command line, load and compile input files, save the compiled output.
+%
+% XXX Maybe we should halt(1) if anything else goes wrong... ie.
+%
+% precompile :-
+%    (parse_command_line(Inputs, Output),
+%     consult_inputs(Inputs),
+%     writef('* Saving compiled output to \'%w\'...\n', [Output]),
+%     qsave_program(Output, [ goal(true), toplevel(true), stand_alone(false) ]),
+%     writef('* Done.\n'), halt(0))
+%       ;
+%    halt(1).
+
+precompile :-
+    parse_command_line(Inputs, Output),
+    consult_inputs(Inputs),
+    writef('* Saving compiled output to \'%w\'...\n', [Output]),
+    qsave_program(Output, [ goal(true), toplevel(true), stand_alone(false) ]),
+    writef('* Done.\n'),
+    halt(0).
+
+%
+% Parse command line, load and compile input files, terminate with exit
+% status 0 if there were no syntax errors.
+%
+
+syntax_check :- 
+    parse_command_line(Inputs, _Output),
+    consult_inputs(Inputs),
+    writef('* OK: all files passed syntax check.\n'),
+    halt(0).
