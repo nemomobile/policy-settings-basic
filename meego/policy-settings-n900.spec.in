@@ -1,7 +1,7 @@
 %define _enable_debug_packages 0
 %define _unpackaged_files_terminate_build 0
 
-Summary: Precompiled basic MeeGo policy settings for the N900.
+Summary: Precompiled basic MeeGo policy settings for the N900
 Name: policy-settings-n900
 Version: ##__VERSION__##
 Release: 1
@@ -22,7 +22,7 @@ Requires: swi-prolog, swi-prolog-lib-core, libprolog, prolog-extensions
 Precompiled basic MeeGo policy settings for the N900.
 
 %package text
-Summary: Basic MeeGo policy settings sources for the N900.
+Summary: Basic MeeGo policy settings sources for the N900
 Group: System Environment/Configuration
 Provides: policy-settings
 Requires: swi-prolog, swi-prolog-lib-core, swi-prolog-lib
