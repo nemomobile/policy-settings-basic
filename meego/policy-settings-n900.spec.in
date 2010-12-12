@@ -37,6 +37,8 @@ Basic MeeGo policy settings sources for the N900.
 %setup -q
 
 %build
+# Ouch... protect ourselves against bad karma from clock drift + autogen
+find . -type f -exec touch {} \;
 ./autogen.sh
 %configure
 make
