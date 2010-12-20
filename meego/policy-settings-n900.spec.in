@@ -45,86 +45,35 @@ make
 
 %install
 [ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
-make DESTDIR=$RPM_BUILD_ROOT install
+make DESTDIR=$RPM_BUILD_ROOT INSTALL_SYMLINKS=1 install
 
 %clean
 [ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
 
-%post
-ruleset=basic
-ln -sf %{_datadir}/policy/rules/$ruleset %{_datadir}/policy/rules/current
-ln -sf %{_datadir}/policy/etc/$ruleset %{_datadir}/policy/etc/current
-for f in `find %{_datadir}/policy/etc/$ruleset/ohm -type f`; do
-    lnk="/etc/${f#%{_datadir}/policy/etc/$ruleset/}"
-    if test -e ${lnk%/*}; then
-        ln -s $f $lnk
-    else
-        echo "WARNING: Cannot link $f to $lnk..."
-	exit 1
-    fi
-done
-
-%post text
-ruleset=basic
-ln -sf %{_datadir}/policy/rules/$ruleset %{_datadir}/policy/rules/current
-ln -sf %{_datadir}/policy/etc/$ruleset %{_datadir}/policy/etc/current
-for f in `find %{_datadir}/policy/etc/$ruleset/ohm -type f`; do
-    lnk="/etc/${f#%{_datadir}/policy/etc/$ruleset/}"
-    if test -e ${lnk%/*}; then
-        ln -s $f $lnk
-    else
-        echo "WARNING: Cannot link $f to $lnk..."
-	exit 1
-    fi
-done
-
-%preun
-# XXX ideally we should check if these point to our files/directories...
-ruleset=basic
-rm -f %{_datadir}/policy/rules/current
-rm -f %{_datadir}/policy/etc/current
-for f in `find %{_datadir}/policy/etc/$ruleset/ohm -type f`; do
-    lnk="/etc/${f#%{_datadir}/policy/etc/$ruleset/}"
-    if test -h ${lnk}; then
-        rm -f $lnk
-    fi
-done
-
-%preun text
-# XXX ideally we should check if these point to our files/directories...
-ruleset=basic
-rm -f %{_datadir}/policy/rules/current
-rm -f %{_datadir}/policy/etc/current
-for f in `find %{_datadir}/policy/etc/$ruleset/ohm -type f`; do
-    lnk="/etc/${f#%{_datadir}/policy/etc/$ruleset/}"
-    if test -h ${lnk}; then
-        # should check if it points to our file...
-        rm -f $lnk
-    fi
-done
-
-%postun
-ruleset=basic
-rm -fr %{_datadir}/policy/rules/$ruleset
-rm -fr %{_datadir}/policy/etc/$ruleset
-
-%postun text
-ruleset=basic
-rm -fr %{_datadir}/policy/rules/$ruleset
-rm -fr %{_datadir}/policy/etc/$ruleset
-
 %files
 %defattr(-,root,root,-)
+%{_datadir}/policy/etc/current
+%{_datadir}/policy/rules/current
+%{_sysconfdir}/ohm/*.ini
+%{_sysconfdir}/ohm/plugins.d/*.ini
+%dir %{_datadir}/policy/rules/basic
 %{_datadir}/policy/rules/basic/*.plc
 %{_datadir}/policy/rules/basic/*.dresc
+%dir %{_datadir}/policy/etc/basic
 %{_datadir}/policy/etc/basic/*.conf
 %{_datadir}/policy/etc/basic/ohm
 %{_datadir}/policy/etc/basic/pulse
 
 %files text
 %defattr(-,root,root,-)
+%{_datadir}/policy/etc/current
+%{_datadir}/policy/rules/current
+%{_sysconfdir}/ohm/*.ini
+%{_sysconfdir}/ohm/plugins.d/*.ini
+%dir %{_datadir}/policy/rules/basic
 %{_datadir}/policy/rules/basic/*.pl
 %{_datadir}/policy/rules/basic/*.dres
+%dir %{_datadir}/policy/etc/basic
 %{_datadir}/policy/etc/basic/*.conf
 %{_datadir}/policy/etc/basic/ohm
 %{_datadir}/policy/etc/basic/pulse
