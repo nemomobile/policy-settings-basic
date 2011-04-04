@@ -60,14 +60,6 @@ invalid_audio_device_choice(call, sink, hac) :-
 invalid_audio_device_choice(call, sink, hacandtvout) :-
     resource:resource_owner(video_playback, call).
 
-%
-%
-%
-invalid_audio_device_choice(_, sink, bthsp) :-
-    bluetooth_override(_).
-
-invalid_audio_device_choice(_, sink, tvoutandbthsp) :-
-    bluetooth_override(_).
 
 %
 % Do not route ringtones to private accessories
