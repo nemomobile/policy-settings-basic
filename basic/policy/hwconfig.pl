@@ -7,6 +7,9 @@ audio_device_type(source).
 
 audio_device(tvoutandbta2dp).
 audio_device(tvoutandbthsp).
+audio_device(ihfandbthsp).
+audio_device(ihfandheadset).
+audio_device(ihfandheadphone).
 audio_device(bta2dp).
 audio_device(bthsp).
 audio_device(headset).
@@ -25,6 +28,9 @@ audio_device(null).
 
 audio_device_type(sink  , tvoutandbta2dp).
 audio_device_type(sink  , tvoutandbthsp).
+audio_device_type(sink  , ihfandbthsp).
+audio_device_type(sink  , ihfandheadset).
+audio_device_type(sink  , ihfandheadphone).
 audio_device_type(sink  , bta2dp).
 audio_device_type(sink  , bthsp).
 audio_device_type(sink  , headset).
@@ -45,6 +51,9 @@ audio_device_type(source, microphone).
 
 audio_device_privacy(private, tvoutandbta2dp).
 audio_device_privacy(private, tvoutandbthsp).
+audio_device_privacy(private, ihfandbthsp).
+audio_device_privacy(private, ihfandheadset).
+audio_device_privacy(private, ihfandheadphone).
 audio_device_privacy(private, bta2dp).
 audio_device_privacy(private, bthsp).
 audio_device_privacy(private, headset).
@@ -98,12 +107,18 @@ twin_video_device(tvout, builtinandtvout).
 %       hacandtvout and earpieceandtvout become also selectable).
 % 
 
+twin_audio_device(ihfandheadset).
+twin_audio_device(ihfandheadphone).
+twin_audio_device(ihfandbthsp).
 twin_audio_device(ihfandtvout).
 
 twin_audio_device(tvout     , bta2dp  , tvoutandbta2dp).   % not really a twin
 twin_audio_device(tvout     , bthsp   , tvoutandbthsp).    % not really a twin
 twin_audio_device(bta2dp    , tvout   , tvoutandbta2dp).
 twin_audio_device(bthsp     , tvout   , tvoutandbthsp).
+twin_audio_device(headset   , ihf     , ihfandheadset).
+twin_audio_device(headphone , ihf     , ihfandheadphone).
+twin_audio_device(bthsp     , ihf     , ihfandbthsp).
 twin_audio_device(tvout     , ihf     , ihfandtvout).
 twin_audio_device(tvout     , hac     , hacandtvout).      % not really a twin
 twin_audio_device(tvout     , earpiece, earpieceandtvout). % not really a twin
