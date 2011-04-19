@@ -1,5 +1,5 @@
 PACKAGE := policy-settings-n900
-VERSION := 0.1.0
+VERSION := 0.1.1
 THISDIR := meego
 
 TOPDIR  := $(shell \
