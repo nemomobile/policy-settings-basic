@@ -72,6 +72,9 @@ $audio_device_selectable += { name: headphone       , selectable: 0 }
 $audio_device_selectable += { name: headset         , selectable: 0 }
 $audio_device_selectable += { name: bthsp           , selectable: 0 }
 $audio_device_selectable += { name: bta2dp          , selectable: 0 }
+$audio_device_selectable += { name: ihfandheadset   , selectable: 0 }
+$audio_device_selectable += { name: ihfandheadphone , selectable: 0 }
+$audio_device_selectable += { name: ihfandbthsp     , selectable: 0 }
 $audio_device_selectable += { name: tvoutandbthsp   , selectable: 0 }
 $audio_device_selectable += { name: tvoutandbta2dp  , selectable: 0 }
 
@@ -91,8 +94,13 @@ $audio_mode += { device: headset         , default: hs            ,   \
                                            eci:     eci           }
 $audio_mode += { device: bthsp           , default: btmono        }
 $audio_mode += { device: bta2dp          , default: bta2dp        }
+$audio_mode += { device: ihfandbthsp     , default: ihfandbtmono  }
 $audio_mode += { device: tvoutandbthsp   , default: btmono        }
 $audio_mode += { device: tvoutandbta2dp  , default: bta2dp        }
+$audio_mode += { device: ihfandheadset   , default: ihfandheadset ,   \
+                                           eci:     ihfandeci     }
+$audio_mode += { device: ihfandheadphone , default: ihfandlineout,    \
+                                           eci:     ihfandeci     }
 
 
 # audio output configuration
@@ -119,6 +127,12 @@ $audio_output_configuration += { device: headset        , mode: hs           ,\
 $audio_output_configuration += { device: bthsp          , mode: btmono       ,\
 			         hwid:na }
 $audio_output_configuration += { device: bta2dp         , mode: bta2dp       ,\
+			         hwid:na}
+$audio_output_configuration += { device: ihfandheadset  , mode:ihfandheadset,\
+			         hwid:na}
+$audio_output_configuration += { device: ihfandheadphone , mode:ihfandlineout,\
+			         hwid:na}
+$audio_output_configuration += { device: ihfandbthsp    , mode: ihfandbtmono,\
 			         hwid:na}
 $audio_output_configuration += { device: tvoutandbthsp  , mode: btmono       ,\
 			         hwid:na}

@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.52)
-AC_INIT(policy-settings, 0.0.1)
+AC_INIT(policy-settings, 0.1.1)
 AC_CONFIG_SRCDIR(basic)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AC_CONFIG_HEADERS(dummy.h)

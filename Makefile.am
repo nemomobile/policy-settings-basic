@@ -1,4 +1,4 @@
-SUBDIRS = basic # rx71 rx51 cgroups freezer test
+SUBDIRS = basic
 
 MAINTAINERCLEANFILES = Makefile.in
 
