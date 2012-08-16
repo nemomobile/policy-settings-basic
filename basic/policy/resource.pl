@@ -2,10 +2,10 @@
 	  [update_resource_entries/1, update_resource_owner_entries/1,
 	   resource_owner/2, resource_owner/3, resource_group/2,
  	   granted_resource/2, granted_resource/3, active_resource/3,
- 	   force_resource_release/3]).
+	   force_resource_release/3, resource_class_request/4]).
 
 rules([update_resource_entries/1, update_resource_owner_entries/1,
-       force_resource_release/3]).
+       force_resource_release/3, resource_class_request/4]).
 
 
 /*
@@ -447,3 +447,21 @@ active_resource(Class, Group, Resource) :-
     GrantedBit is Granted /\ ResourceBit,
     GrantedBit = ResourceBit,
     !.
+
+resource_bits([], A, A).
+resource_bits([A|C], B, E) :-
+    D is A\/B,
+    resource_bits(C, D, E).
+
+resource_bits_list(C, D) :-
+    findall(A,
+        (resource_classes:resource_bit(B, A),
+        resource_classes:valid_resource_class(B, C)),
+        D).
+
+resource_class_request(Class, M, O, Result) :-
+    resource_bits_list(Class, BitList),
+    resource_bits(BitList, 0, BitMask),
+    Mandatory is M/\BitMask,
+    Optional is O/\BitMask,
+    Result=[[resource, [mandatory, Mandatory], [optional, Optional]]].
