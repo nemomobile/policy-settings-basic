@@ -212,7 +212,7 @@ $context   = { variable: camera         ,  value: inactive }
 # sensors
 $proximity = { state: 'unknown' }
 
-# misc
+# mute state for microphones
 $mute  = { value: 0 }
 
 
@@ -267,6 +267,10 @@ audio_cork: $resource_owner
 
 audio_mute: $mute
 	$audio_mute[device] |= prolog(set_mute)
+
+audio_mute_request:
+	$mute:value = &mute_state
+	resolve(all)
 
 actions: audio_actions video_actions vibra_actions backlight_actions
 
