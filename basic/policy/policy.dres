@@ -336,7 +336,7 @@ update_accessory_mode:
 						      &accessory_mode)
 
 telephony_request:
-	#$call_action = prolog(call_request, &call_id, &call_state)
+	$call_action = prolog(call_request, &call_id, &call_state)
 
 telephony_audio_update:
 
