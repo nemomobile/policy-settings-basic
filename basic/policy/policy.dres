@@ -212,9 +212,11 @@ $context   = { variable: camera         ,  value: inactive }
 # sensors
 $proximity = { state: 'unknown' }
 
-# misc
+# mute state for microphones
 $mute  = { value: 0 }
 
+# override route privacy value to enable public routes during call
+$privacy_override = { value: default }
 
 #
 # we always need at least one enforcement point
@@ -247,7 +249,7 @@ video_route: $video_device_selectable $gconf
 	$video_route = prolog(set_video_routes)
 
 audio_route: $audio_device_selectable $audio_output_configuration \
-             $resource_owner
+             $resource_owner $privacy_override
 	$privacy[stage]    |= prolog(set_audio_privacy, previous)
 	$audio_route[type] |= prolog(set_audio_routes)
 	$privacy[stage]    |= prolog(set_audio_privacy, current)
@@ -267,6 +269,14 @@ audio_cork: $resource_owner
 
 audio_mute: $mute
 	$audio_mute[device] |= prolog(set_mute)
+
+audio_mute_request:
+	$mute:value = &mute_state
+	resolve(all)
+
+privacy_override_request:
+	$privacy_override:value = &privacy_override_state
+	resolve(all)
 
 actions: audio_actions video_actions vibra_actions backlight_actions
 
@@ -326,7 +336,7 @@ update_accessory_mode:
 						      &accessory_mode)
 
 telephony_request:
-	#$call_action = prolog(call_request, &call_id, &call_state)
+	$call_action = prolog(call_request, &call_id, &call_state)
 
 telephony_audio_update:
 
