@@ -57,6 +57,7 @@ $audio_device_accessible += { name: headphone    , driver: 1, connected: 0 }
 $audio_device_accessible += { name: headset      , driver: 1, connected: 0 }
 $audio_device_accessible += { name: bthsp        , driver: 0, connected: 0 }
 $audio_device_accessible += { name: bta2dp       , driver: 0, connected: 0 }
+$audio_device_accessible += { name: incompatible , driver: 0, connected: 0 }
 
 $audio_device_selectable  = { name: null            , selectable: 1 }
 $audio_device_selectable += { name: ihf             , selectable: 1 }
@@ -77,6 +78,7 @@ $audio_device_selectable += { name: ihfandheadphone , selectable: 0 }
 $audio_device_selectable += { name: ihfandbthsp     , selectable: 0 }
 $audio_device_selectable += { name: tvoutandbthsp   , selectable: 0 }
 $audio_device_selectable += { name: tvoutandbta2dp  , selectable: 0 }
+$audio_device_selectable += { name: incompatible    , selectable: 0 }
 
 
 # audio modes for ECI detection

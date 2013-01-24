@@ -235,3 +235,15 @@ valid_resource_class( headset_buttons ,   implicit    ).
 valid_resource_class( headset_buttons ,   event       ).
 valid_resource_class( headset_buttons ,   background  ).
 valid_resource_class( headset_buttons ,   nobody      ).
+
+valid_resource_class( snap_button     ,    navigator   ).
+valid_resource_class( snap_button     ,    call        ).
+valid_resource_class( snap_button     ,    camera      ).
+valid_resource_class( snap_button     ,    ringtone    ).
+valid_resource_class( snap_button     ,    alarm       ).
+valid_resource_class( snap_button     ,    game        ).
+valid_resource_class( snap_button     ,    player      ).
+valid_resource_class( snap_button     ,    implicit    ).
+valid_resource_class( snap_button     ,    event       ).
+valid_resource_class( snap_button     ,    background  ).
+valid_resource_class( snap_button     ,    nobody      ).

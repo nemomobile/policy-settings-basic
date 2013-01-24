@@ -5,6 +5,7 @@ video_device(tvout).
 audio_device_type(sink).
 audio_device_type(source).
 
+audio_device(incompatible).
 audio_device(tvoutandbta2dp).
 audio_device(tvoutandbthsp).
 audio_device(ihfandbthsp).
@@ -26,6 +27,7 @@ audio_device(ihf).
 audio_device(null).
 
 
+audio_device_type(sink  , incompatible).
 audio_device_type(sink  , tvoutandbta2dp).
 audio_device_type(sink  , tvoutandbthsp).
 audio_device_type(sink  , ihfandbthsp).
@@ -49,6 +51,7 @@ audio_device_type(source, headset).
 audio_device_type(source, headmike).
 audio_device_type(source, microphone).
 
+audio_device_privavy(private, incompatible).
 audio_device_privacy(private, tvoutandbta2dp).
 audio_device_privacy(private, tvoutandbthsp).
 audio_device_privacy(private, ihfandbthsp).
@@ -69,6 +72,7 @@ audio_device_privacy(private, microphone).
 audio_device_privacy(public , microphone).
 audio_device_privacy(private, headmike).
 
+accessory(incompatible).
 accessory(bta2dp).
 accessory(bthsp).
 accessory(headset).
@@ -79,6 +83,7 @@ accessory(hac).
 
 video_accessory(tvout).
 
+audio_accessory(incompatible).
 audio_accessory(bta2dp).
 audio_accessory(bthsp).
 audio_accessory(headset).

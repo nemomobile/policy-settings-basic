@@ -115,3 +115,5 @@ invalid_audio_device_choice(_, source, tvoutandbthsp) :-
 
 invalid_audio_device_choice(_, source, headset) :-
     not(audio_route:get_route(sink, headset)).
+
+invalid_audio_device_choice(_, _, incompatible).
