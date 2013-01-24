@@ -213,10 +213,10 @@ $context   = { variable: camera         ,  value: inactive }
 $proximity = { state: 'unknown' }
 
 # mute state for microphones
-$mute  = { value: 0 }
+$mute  = { default_value: 0, value: 0 }
 
 # override route privacy value to enable public routes during call
-$privacy_override = { value: default }
+$privacy_override = { default_value: default, value: default }
 
 #
 # we always need at least one enforcement point
@@ -274,9 +274,15 @@ audio_mute_request:
 	$mute:value = &mute_state
 	resolve(all)
 
+audio_mute_reset:
+	$mute:value = $mute:default_value
+
 privacy_override_request:
 	$privacy_override:value = &privacy_override_state
 	resolve(all)
+
+privacy_override_reset:
+	$privacy_override:value = $privacy_override:default_value
 
 actions: audio_actions video_actions vibra_actions backlight_actions
 
@@ -373,7 +379,7 @@ bthsp_connect:
 
 
 # first call hook
-telephony_first_call_hook:
+telephony_first_call_hook: audio_mute_reset privacy_override_reset
 	#$mode[foo] = prolog(update_mode, telephony)
 
 # last call hook
@@ -385,7 +391,7 @@ telephony_last_call_hook:
 telephony_call_start_hook:
 
 # call end hook
-telephony_call_end_hook:
+telephony_call_end_hook: audio_mute_reset privacy_override_reset
 
 
 # call connect hook (call locally accepted)
