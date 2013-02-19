@@ -4,7 +4,7 @@ PREFIX = com.nokia.policy
 # resource
 $resource_owner  = {resource: headset_buttons, owner: nobody, mode: shared, \
                     group   : nobody }
-$resource_owner  = {resource: lens_cover,      owner: nobody, mode: shared, \
+$resource_owner += {resource: lens_cover,      owner: nobody, mode: shared, \
                     group   : nobody }
 $resource_owner += {resource: snap_button,     owner: nobody, mode: shared, \
                     group   : nobody }
