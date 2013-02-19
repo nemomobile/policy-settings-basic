@@ -14,6 +14,7 @@ volume_limit( navigator ,  player     , 0    ).
 volume_limit( navigator ,  flash      , 0    ).
 volume_limit( navigator ,  event      , 100  ).
 volume_limit( navigator ,  systemsound, 100  ).
+volume_limit( navigator ,  feedbacksound, 100  ).
 volume_limit( navigator ,  inputsound , 0    ).
 volume_limit( navigator ,  othermedia , 0    ).
 volume_limit( navigator ,  background , 50   ).
@@ -33,6 +34,7 @@ volume_limit( call      ,  player     , 0    ).
 volume_limit( call      ,  flash      , 0    ).
 volume_limit( call      ,  event      , 0    ).
 volume_limit( call      ,  systemsound, 100  ).
+volume_limit( call      ,  feedbacksound, 100  ).
 volume_limit( call      ,  inputsound , 0    ).
 volume_limit( call      ,  othermedia , 0    ).
 volume_limit( call      ,  background , 10   ).
@@ -52,6 +54,7 @@ volume_limit( videoeditor,  player     , 0    ).
 volume_limit( videoeditor,  flash      , 0    ).
 volume_limit( videoeditor,  event      , 0    ).
 volume_limit( videoeditor,  systemsound, 100  ).
+volume_limit( videoeditor,  feedbacksound, 100  ).
 volume_limit( videoeditor,  inputsound , 0    ).
 volume_limit( videoeditor,  othermedia , 0    ).
 volume_limit( videoeditor,  background , 10   ).
@@ -71,6 +74,7 @@ volume_limit( camera    ,  player     , 0    ).
 volume_limit( camera    ,  flash      , 0    ).
 volume_limit( camera    ,  event      , 0    ).
 volume_limit( camera    ,  systemsound, 0    ).
+volume_limit( camera    ,  feedbacksound, 0    ).
 volume_limit( camera    ,  inputsound , 0    ).
 volume_limit( camera    ,  othermedia , 0    ).
 volume_limit( camera    ,  background , 0    ).
@@ -90,6 +94,7 @@ volume_limit( ringtone  ,  player     , 0    ).
 volume_limit( ringtone  ,  flash      , 0    ).
 volume_limit( ringtone  ,  event      , 0    ).
 volume_limit( ringtone  ,  systemsound, 0    ).
+volume_limit( ringtone  ,  feedbacksound, 0    ).
 volume_limit( ringtone  ,  inputsound , 0    ).
 volume_limit( ringtone  ,  othermedia , 0    ).
 volume_limit( ringtone  ,  background , 0    ).
@@ -109,6 +114,7 @@ volume_limit( alarm     ,  player     , 0    ).
 volume_limit( alarm     ,  flash      , 0    ).
 volume_limit( alarm     ,  event      , 0    ).
 volume_limit( alarm     ,  systemsound, 0    ).
+volume_limit( alarm     ,  feedbacksound, 0    ).
 volume_limit( alarm     ,  inputsound , 0    ).
 volume_limit( alarm     ,  othermedia , 0    ).
 volume_limit( alarm     ,  background , 0    ).
@@ -128,6 +134,7 @@ volume_limit( game      ,  player     , 100  ).
 volume_limit( game      ,  flash      , 0    ).
 volume_limit( game      ,  event      , 100  ).
 volume_limit( game      ,  systemsound, 100  ).
+volume_limit( game      ,  feedbacksound, 100  ).
 volume_limit( game      ,  inputsound , 0    ).
 volume_limit( game      ,  othermedia , 0    ).
 volume_limit( game      ,  background , 100  ).
@@ -147,6 +154,7 @@ volume_limit( player    ,  player     , 100  ).
 volume_limit( player    ,  flash      , 0    ).
 volume_limit( player    ,  event      , 100  ).
 volume_limit( player    ,  systemsound, 100  ).
+volume_limit( player    ,  feedbacksound, 100  ).
 volume_limit( player    ,  inputsound , 0    ).
 volume_limit( player    ,  othermedia , 0    ).
 volume_limit( player    ,  background , 100  ).
@@ -166,6 +174,7 @@ volume_limit( flash     ,  player     , 100  ).
 volume_limit( flash     ,  flash      , 100  ).
 volume_limit( flash     ,  event      , 100  ).
 volume_limit( flash     ,  systemsound, 100  ).
+volume_limit( flash     ,  feedbacksound, 100  ).
 volume_limit( flash     ,  inputsound , 0    ).
 volume_limit( flash     ,  othermedia , 0    ).
 volume_limit( flash     ,  background , 100  ).
@@ -185,6 +194,7 @@ volume_limit( othermedia,  player     , 100  ).
 volume_limit( othermedia,  flash      , 100  ).
 volume_limit( othermedia,  event      , 100  ).
 volume_limit( othermedia,  systemsound, 100  ).
+volume_limit( othermedia,  feedbacksound, 100  ).
 volume_limit( othermedia,  inputsound , 100  ).
 volume_limit( othermedia,  othermedia , 100  ).
 volume_limit( othermedia,  background , 100  ).
@@ -204,6 +214,7 @@ volume_limit( event     ,  player     , 0    ).
 volume_limit( event     ,  flash      , 0    ).
 volume_limit( event     ,  event      , 100  ).
 volume_limit( event     ,  systemsound, 100  ).
+volume_limit( event     ,  feedbacksound, 100  ).
 volume_limit( event     ,  inputsound , 0    ).
 volume_limit( event     ,  othermedia , 0    ).
 volume_limit( event     ,  background , 10   ).
@@ -223,6 +234,7 @@ volume_limit( background,  player     , 100  ).
 volume_limit( background,  flash      , 100  ).
 volume_limit( background,  event      , 100  ).
 volume_limit( background,  systemsound, 100  ).
+volume_limit( background,  feedbacksound, 100  ).
 volume_limit( background,  inputsound , 100  ).
 volume_limit( background,  othermedia , 100  ).
 volume_limit( background,  background , 100  ).
@@ -242,6 +254,7 @@ volume_limit( idle      ,  player     , 100  ).
 volume_limit( idle      ,  flash      , 100  ).
 volume_limit( idle      ,  event      , 100  ).
 volume_limit( idle      ,  systemsound, 100  ).
+volume_limit( idle      ,  feedbacksound, 100  ).
 volume_limit( idle      ,  inputsound , 100  ).
 volume_limit( idle      ,  othermedia , 100  ).
 volume_limit( idle      ,  background , 100  ).

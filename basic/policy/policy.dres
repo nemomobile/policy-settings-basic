@@ -4,7 +4,7 @@ PREFIX = com.nokia.policy
 # resource
 $resource_owner  = {resource: headset_buttons, owner: nobody, mode: shared, \
                     group   : nobody }
-$resource_owner  = {resource: lens_cover,      owner: nobody, mode: shared, \
+$resource_owner += {resource: lens_cover,      owner: nobody, mode: shared, \
                     group   : nobody }
 $resource_owner += {resource: snap_button,     owner: nobody, mode: shared, \
                     group   : nobody }
@@ -153,6 +153,7 @@ $volume_limit  = { group: idle       , limit: 100 }
 $volume_limit += { group: background , limit: 100 }
 $volume_limit += { group: inputsound , limit: 100 }
 $volume_limit += { group: systemsound, limit: 100 }
+$volume_limit += { group: feedbacksound, limit: 100 }
 $volume_limit += { group: event      , limit: 100 }
 $volume_limit += { group: othermedia , limit: 100 }
 $volume_limit += { group: flash      , limit: 100 }
@@ -172,6 +173,7 @@ $volume_limit += { group: alwayson   , limit: 100 }
 $audio_cork  = { group: idle       , cork: uncorked }
 $audio_cork += { group: background , cork: uncorked }
 $audio_cork += { group: systemsound, cork: uncorked }
+$audio_cork += { group: feedbacksound, cork: uncorked }
 $audio_cork += { group: inputsound , cork: uncorked }
 $audio_cork += { group: event      , cork: uncorked }
 $audio_cork += { group: alarm      , cork: uncorked }
