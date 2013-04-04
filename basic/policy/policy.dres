@@ -263,10 +263,10 @@ audio_route: $audio_device_selectable $audio_output_configuration \
 	                               	        player, player)
 	end
 
-audio_volume: $resource_owner $resource_set
+audio_volume: $resource_owner $resource_set $volume_limit
 	$volume_limit[group] |= prolog(set_volume_limits)
 
-audio_cork: $resource_owner
+audio_cork: $resource_owner $audio_cork
 	$audio_cork[group] |= prolog(set_corks)
 
 audio_mute: $mute

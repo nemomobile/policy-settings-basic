@@ -196,7 +196,7 @@ volume_limit( othermedia,  event      , 100  ).
 volume_limit( othermedia,  systemsound, 100  ).
 volume_limit( othermedia,  feedbacksound, 100  ).
 volume_limit( othermedia,  inputsound , 100  ).
-volume_limit( othermedia,  othermedia , 100  ).
+volume_limit( othermedia,  othermedia , 0  ).
 volume_limit( othermedia,  background , 100  ).
 volume_limit( othermedia,  idle       , 100  ).
 
@@ -236,7 +236,7 @@ volume_limit( background,  event      , 100  ).
 volume_limit( background,  systemsound, 100  ).
 volume_limit( background,  feedbacksound, 100  ).
 volume_limit( background,  inputsound , 100  ).
-volume_limit( background,  othermedia , 100  ).
+volume_limit( background,  othermedia , 0  ).
 volume_limit( background,  background , 100  ).
 volume_limit( background,  idle       , 100  ).
 
@@ -256,7 +256,7 @@ volume_limit( idle      ,  event      , 100  ).
 volume_limit( idle      ,  systemsound, 100  ).
 volume_limit( idle      ,  feedbacksound, 100  ).
 volume_limit( idle      ,  inputsound , 100  ).
-volume_limit( idle      ,  othermedia , 100  ).
+volume_limit( idle      ,  othermedia , 0  ).
 volume_limit( idle      ,  background , 100  ).
 volume_limit( idle      ,  idle       , 100  ).
 
