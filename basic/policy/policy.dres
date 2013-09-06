@@ -391,22 +391,30 @@ telephony_last_call_hook:
 
 # call start hook: workaround for tonegen bad audio quality at call start
 telephony_call_start_hook:
+	$context[variable:call]:value = ringing
+
+# local hangup hook
+telephony_local_hungup_hook:
 
 # call end hook
 telephony_call_end_hook: audio_mute_reset privacy_override_reset
-
+	$context[variable:call]:value = inactive
 
 # call connect hook (call locally accepted)
 telephony_call_connect_hook:
+	$context[variable:call]:value = connected
 
 # call onhold hook
 telephony_call_onhold_hook:
+	$context[variable:call]:value = hold
 
 # call offhold hook
 telephony_call_offhold_hook:
+	$context[variable:call]:value = active
 
 # call active hook (call remotely accepted)
 telephony_call_active_hook:
+	$context[variable:call]:value = active
 
 # dialstring sending started
 telephony_sending_dialstring:
