@@ -4,7 +4,7 @@ PREFIX = com.nokia.policy
 # resource
 $resource_owner  = {resource: headset_buttons, owner: nobody, mode: shared, \
                     group   : nobody }
-$resource_owner  = {resource: lens_cover,      owner: nobody, mode: shared, \
+$resource_owner += {resource: lens_cover,      owner: nobody, mode: shared, \
                     group   : nobody }
 $resource_owner += {resource: snap_button,     owner: nobody, mode: shared, \
                     group   : nobody }
@@ -153,6 +153,7 @@ $volume_limit  = { group: idle       , limit: 100 }
 $volume_limit += { group: background , limit: 100 }
 $volume_limit += { group: inputsound , limit: 100 }
 $volume_limit += { group: systemsound, limit: 100 }
+$volume_limit += { group: feedbacksound, limit: 100 }
 $volume_limit += { group: event      , limit: 100 }
 $volume_limit += { group: othermedia , limit: 100 }
 $volume_limit += { group: flash      , limit: 100 }
@@ -172,6 +173,7 @@ $volume_limit += { group: alwayson   , limit: 100 }
 $audio_cork  = { group: idle       , cork: uncorked }
 $audio_cork += { group: background , cork: uncorked }
 $audio_cork += { group: systemsound, cork: uncorked }
+$audio_cork += { group: feedbacksound, cork: uncorked }
 $audio_cork += { group: inputsound , cork: uncorked }
 $audio_cork += { group: event      , cork: uncorked }
 $audio_cork += { group: alarm      , cork: uncorked }
@@ -206,15 +208,17 @@ $backlight   = { state: off }
 
 # contexts
 $context   = { variable: call           ,  value: inactive }
-$context   = { variable: call_audio_type,  value: none     }
-$context   = { variable: camera         ,  value: inactive }
+#$context   = { variable: call_audio_type,  value: none     }
+#$context   = { variable: camera         ,  value: inactive }
 
 # sensors
 $proximity = { state: 'unknown' }
 
-# misc
-$mute  = { value: 0 }
+# mute state for microphones
+$mute  = { default_value: 0, value: 0 }
 
+# override route privacy value to enable public routes during call
+$privacy_override = { default_value: default, value: default }
 
 #
 # we always need at least one enforcement point
@@ -229,7 +233,7 @@ $resolver = { blocked: 0 }
 # internally used variables
 $completion_handler_called = { value: no }
 
-all: plugin_check video_route audio_route audio_volume audio_cork audio_mute \
+all: plugin_check video_route audio_route audio_volume audio_cork audio_mute context \
      $vibra_mute $backlight $enforcement_point
 	if !$resolver:blocked then
 	    #echo('*** all ***')
@@ -247,7 +251,7 @@ video_route: $video_device_selectable $gconf
 	$video_route = prolog(set_video_routes)
 
 audio_route: $audio_device_selectable $audio_output_configuration \
-             $resource_owner
+             $resource_owner $privacy_override
 	$privacy[stage]    |= prolog(set_audio_privacy, previous)
 	$audio_route[type] |= prolog(set_audio_routes)
 	$privacy[stage]    |= prolog(set_audio_privacy, current)
@@ -259,14 +263,28 @@ audio_route: $audio_device_selectable $audio_output_configuration \
 	                               	        player, player)
 	end
 
-audio_volume: $resource_owner $resource_set
+audio_volume: $resource_owner $resource_set $volume_limit
 	$volume_limit[group] |= prolog(set_volume_limits)
 
-audio_cork: $resource_owner
+audio_cork: $resource_owner $audio_cork
 	$audio_cork[group] |= prolog(set_corks)
 
 audio_mute: $mute
 	$audio_mute[device] |= prolog(set_mute)
+
+audio_mute_request:
+	$mute:value = &mute_state
+	resolve(all)
+
+audio_mute_reset:
+	$mute:value = $mute:default_value
+
+privacy_override_request:
+	$privacy_override:value = &privacy_override_state
+	resolve(all)
+
+privacy_override_reset:
+	$privacy_override:value = $privacy_override:default_value
 
 actions: audio_actions video_actions vibra_actions backlight_actions
 
@@ -326,7 +344,7 @@ update_accessory_mode:
 						      &accessory_mode)
 
 telephony_request:
-	#$call_action = prolog(call_request, &call_id, &call_state)
+	$call_action = prolog(call_request, &call_id, &call_state)
 
 telephony_audio_update:
 
@@ -363,7 +381,7 @@ bthsp_connect:
 
 
 # first call hook
-telephony_first_call_hook:
+telephony_first_call_hook: audio_mute_reset privacy_override_reset
 	#$mode[foo] = prolog(update_mode, telephony)
 
 # last call hook
@@ -374,9 +392,11 @@ telephony_last_call_hook:
 # call start hook: workaround for tonegen bad audio quality at call start
 telephony_call_start_hook:
 
-# call end hook
-telephony_call_end_hook:
+# local hungup hook
+telephony_local_hungup_hook:
 
+# call end hook
+telephony_call_end_hook: audio_mute_reset privacy_override_reset
 
 # call connect hook (call locally accepted)
 telephony_call_connect_hook:
@@ -396,6 +416,10 @@ telephony_sending_dialstring:
 # dialstring sending stopped
 telephony_stopped_dialstring:
 
+
+# context variable:call depends on com.nokia.policy.call ($call) changes
+context: $call
+	$context[variable] |= prolog(update_contexts)
 
 # block resolving if any policy plugin is not ready
 plugin_check: $plugin

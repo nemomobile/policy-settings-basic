@@ -34,7 +34,7 @@ implicated_privacy(public) :-
 % explicitly demands it via privacy override
 %
 invalid_audio_device_choice(call, sink, Device) :-
-    (implicated_privacy(public) *-> Privacy=private ; Privacy=public),
+    ((audio_route:privacy_override(public) ; implicated_privacy(public)) *-> Privacy=private ; Privacy=public),
     audio_device_privacy(Privacy, Device).
 
 

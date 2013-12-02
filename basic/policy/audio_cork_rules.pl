@@ -14,6 +14,7 @@ cork( navigator  , player     , uncorked).
 cork( navigator  , flash      , uncorked).
 cork( navigator  , event      , uncorked).
 cork( navigator  , systemsound, uncorked).
+cork( navigator  , feedbacksound, uncorked).
 cork( navigator  , inputsound , uncorked).
 cork( navigator  , othermedia , corked  ).
 cork( navigator  , background , uncorked).
@@ -33,6 +34,7 @@ cork( call       , player     , uncorked).
 cork( call       , flash      , uncorked).
 cork( call       , event      , uncorked).
 cork( call       , systemsound, uncorked).
+cork( call       , feedbacksound, uncorked).
 cork( call       , inputsound , uncorked).
 cork( call       , othermedia , corked  ).
 cork( call       , background , uncorked).
@@ -52,8 +54,9 @@ cork( videoeditor, player     , uncorked).
 cork( videoeditor, flash      , uncorked).
 cork( videoeditor, event      , uncorked).
 cork( videoeditor, systemsound, uncorked).
+cork( videoeditor, feedbacksound, uncorked).
 cork( videoeditor, inputsound , uncorked).
-cork( videoeditor, othermedia , uncorked).
+cork( videoeditor, othermedia , corked  ).
 cork( videoeditor, background , uncorked).
 cork( videoeditor, idle       , uncorked).
 
@@ -71,6 +74,7 @@ cork( camera     , player     , uncorked).
 cork( camera     , flash      , uncorked).
 cork( camera     , event      , uncorked).
 cork( camera     , systemsound, uncorked).
+cork( camera     , feedbacksound, uncorked).
 cork( camera     , inputsound , uncorked).
 cork( camera     , othermedia , corked  ).
 cork( camera     , background , uncorked).
@@ -86,12 +90,13 @@ cork( ringtone   , camera     , uncorked).
 cork( ringtone   , ringtone   , uncorked).
 cork( ringtone   , alarm      , uncorked).
 cork( ringtone   , game       , uncorked).
-cork( ringtone   , player     , uncorked).
+cork( ringtone   , player     , corked  ).
 cork( ringtone   , flash      , uncorked).
 cork( ringtone   , event      , uncorked).
 cork( ringtone   , systemsound, uncorked).
+cork( ringtone   , feedbacksound, uncorked).
 cork( ringtone   , inputsound , uncorked).
-cork( ringtone   , othermedia , uncorked).
+cork( ringtone   , othermedia , corked  ).
 cork( ringtone   , background , uncorked).
 cork( ringtone   , idle       , uncorked).
 
@@ -109,8 +114,9 @@ cork( alarm      , player     , uncorked).
 cork( alarm      , flash      , uncorked).
 cork( alarm      , event      , uncorked).
 cork( alarm      , systemsound, uncorked).
+cork( alarm      , feedbacksound, uncorked).
 cork( alarm      , inputsound , uncorked).
-cork( alarm      , othermedia , uncorked).
+cork( alarm      , othermedia , corked  ).
 cork( alarm      , background , uncorked).
 cork( alarm      , idle       , uncorked).
 
@@ -128,6 +134,7 @@ cork( game       , player     , uncorked).
 cork( game       , flash      , uncorked).
 cork( game       , event      , uncorked).
 cork( game       , systemsound, uncorked).
+cork( game       , feedbacksound, uncorked).
 cork( game       , inputsound , uncorked).
 cork( game       , othermedia , corked  ).
 cork( game       , background , uncorked).
@@ -147,6 +154,7 @@ cork( player     , player     , uncorked).
 cork( player     , flash      , uncorked).
 cork( player     , event      , uncorked).
 cork( player     , systemsound, uncorked).
+cork( player     , feedbacksound, uncorked).
 cork( player     , inputsound , uncorked).
 cork( player     , othermedia , corked  ).
 cork( player     , background , uncorked).
@@ -166,6 +174,7 @@ cork( flash      , player     , uncorked).
 cork( flash      , flash      , uncorked).
 cork( flash      , event      , uncorked).
 cork( flash      , systemsound, uncorked).
+cork( flash      , feedbacksound, uncorked).
 cork( flash      , inputsound , uncorked).
 cork( flash      , othermedia , corked  ).
 cork( flash      , background , uncorked).
@@ -185,8 +194,9 @@ cork( othermedia , player     , uncorked).
 cork( othermedia , flash      , uncorked).
 cork( othermedia , event      , uncorked).
 cork( othermedia , systemsound, uncorked).
+cork( othermedia , feedbacksound, uncorked).
 cork( othermedia , inputsound , uncorked).
-cork( othermedia , othermedia , uncorked).
+cork( othermedia , othermedia , corked  ).
 cork( othermedia , background , uncorked).
 cork( othermedia , idle       , uncorked).
 
@@ -204,8 +214,9 @@ cork( event      , player     , uncorked).
 cork( event      , flash      , uncorked).
 cork( event      , event      , uncorked).
 cork( event      , systemsound, uncorked).
+cork( event      , feedbacksound, uncorked).
 cork( event      , inputsound , uncorked).
-cork( event      , othermedia , uncorked).
+cork( event      , othermedia , corked  ).
 cork( event      , background , uncorked).
 cork( event      , idle       , uncorked).
 
@@ -223,8 +234,9 @@ cork( background , player     , uncorked).
 cork( background , flash      , uncorked).
 cork( background , event      , uncorked).
 cork( background , systemsound, uncorked).
+cork( background , feedbacksound, uncorked).
 cork( background , inputsound , uncorked).
-cork( background , othermedia , uncorked).
+cork( background , othermedia , corked  ).
 cork( background , background , uncorked).
 cork( background , idle       , uncorked).
 
@@ -242,7 +254,8 @@ cork( idle       , player     , uncorked).
 cork( idle       , flash      , uncorked).
 cork( idle       , event      , uncorked).
 cork( idle       , systemsound, uncorked).
+cork( idle       , feedbacksound, uncorked).
 cork( idle       , inputsound , uncorked).
-cork( idle       , othermedia , uncorked).
+cork( idle       , othermedia , corked  ).
 cork( idle       , background , uncorked).
 cork( idle       , idle       , uncorked).

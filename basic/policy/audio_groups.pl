@@ -44,6 +44,7 @@ audio_group(flash).       % Browser embeded flash
 audio_group(othermedia).  % Everything else (i.e. default group)
 audio_group(event).       % Messages (SMS, Chat etc), network events etc
 audio_group(systemsound). % Desktop sounds etc
+audio_group(feedbacksound).  % UI sounds, pulldown sounds
 audio_group(inputsound).  % Key presses, touchscreen sounds
 audio_group(background).  % UI and sound-less rendering
 audio_group(idle).        % If nothing runs this is active
@@ -75,6 +76,7 @@ audio_group_type( resource,   flash      ).
 audio_group_type( internal,   othermedia ).
 audio_group_type( resource,   event      ).
 audio_group_type( event   ,   systemsound).
+audio_group_type( event   ,   feedbacksound).
 audio_group_type( event   ,   inputsound ).
 audio_group_type( resource,   background ).
 audio_group_type( internal,   idle       ).
