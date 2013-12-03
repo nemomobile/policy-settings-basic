@@ -1,0 +1,52 @@
+Name: policy-settings-basic-n950
+Summary: Precompiled basic MeeGo policy settings for the N950
+Version: 0.1.6
+Release: 1
+Group: System/Resource Policy
+License: GPLv2
+URL: https://github.com/nemomobile/policy-settings-basic/
+Sources:
+    - "%{name}-%{version}.tar.gz"
+Description: Precompiled basic MeeGo policy settings for the N950.
+
+
+Requires:
+    - ohm >= 1.1.16
+    - ohm-plugins-misc
+    - ohm-plugin-videoep
+    - ohm-plugin-fmradio
+    - ohm-plugin-dspep
+    - ohm-plugins-dbus
+    - ohm-plugin-telephony
+    - ohm-plugin-media
+    - ohm-plugin-accessories
+    - ohm-plugin-resolver
+    - ohm-plugin-ruleengine
+    - pulseaudio-policy-enforcement
+PkgBR:
+    - libdres-utils
+    - swi-prolog
+    - swi-prolog-library
+    - libprolog
+    - prolog-resourcepolicy-extensions
+Provides:
+    - policy-settings
+Configure: autogen
+Builder: none
+BuildArch: noarch
+SubPackages:
+    - Name: text
+      Summary: Basic MeeGo policy settings sources for the N950
+      Group: System/Resource Policy
+      Description: Basic MeeGo policy settings sources for the N950.
+      AutoDepend: false
+      Requires:
+          - swi-prolog-library
+          - ohm >= 1.1.16
+          - ohm-plugins-misc
+          - ohm-plugin-resolver
+          - ohm-plugin-ruleengine
+          - pulseaudio-policy-enforcement
+      Provides:
+          - policy-settings
+

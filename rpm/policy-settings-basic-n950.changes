@@ -1,0 +1,30 @@
+* Thu Apr 04 2013 Juho Hämäläinen <juho.hamalainen@tieto.com> - 0.1.5
+- Deny playback for othermedia streams.
+
+* Tue Feb 19 2013 Juho Hämäläinen <juho.hamalainen@tieto.com> - 0.1.4
+- New audio stream group.
+
+* Thu Jan 24 2013 Juho Hamalainen <juho.hamalainen@tieto.com> - 0.1.3
+- New version of policy settings.
+- Packaged from latest version in github.
+
+* Mon Dec 10 2012 Marko Saukko <marko.saukko@jollamobile.com> - 0.1.1
+- Updated packaging.
+
+* Fri Aug 24 2012 Dmitry Rozhkov <dmitry.rozhkov@jollamobile.com> - 0.1.1
+- Split ohm-plugins-misc package.
+
+* Tue Aug 21 2012 Antoine Reversat <a.reversat@gmail.com> - 0.1.1
+- Fixes NEMO#214: Add snap_button class/resource mapping
+
+* Fri Aug 17 2012 Juho Hämäläinen <juho.hamalainen@tieto.com> - 0.1.1
+- Fixes NEMO#332: Add missing accessory 'incompatible'.
+
+* Wed Aug 16 2012 Juho Hämäläinen <juho.hamalainen@tieto.com> - 0.1.1
+- Fixes NEMO#257: Add missing resource_class_request/4.
+
+* Fri Jun 17 2011 Kalle Lampila <kalle.lampila@cybercom.com> - 0.1.1
+- twin devices and bluetooth support.
+
+* Fri Jan 14 2011 Kalle Lampila <kalle.lampila@cybercom.com> - 0.0.1
+- Initial build.
