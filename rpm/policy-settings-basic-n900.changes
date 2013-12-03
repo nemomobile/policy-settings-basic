@@ -1,0 +1,23 @@
+* Mon Dec 10 2012 Marko Saukko <marko.saukko@jollamobile.com> - 0.1.1
+- Updated packaging.
+
+* Fri Aug 24 2012 Dmitry Rozhkov <dmitry.rozhkov@jollamobile.com> - 0.1.1
+- Split ohm-plugins-misc package.
+
+* Thu Aug 23 2012 Antoine Reversat <a.reversat@gmail.com> - 0.1.1
+- Port same patches as for N950 fixes NEMO#286
+
+* Thu Apr 21 2011 Sami Sirkia <sami.sirkia@cybercom.com> - 0.1.1
+- Added support for "ihfand* twin audio devices"
+  Combinations of: "ihf and bthsp", "ihf and headset" and
+  "ihf and headphone" are now possible.
+- Fixed: BMC#9972 - Audio cannot be heard via Bluetooth Headset
+
+* Thu Jan 13 2011 Kalle Lampila <kalle.lampila@cybercom.com> - 0.0.1
+- Fixed package names to include basic
+
+* Thu Dec 16 2010 Kalle Lampila <kalle.lampila@cybercom.com> - 0.0.1
+- Packaging now uses spectacle
+
+* Sun Dec 12 2010 Krisztian Litkey <krisztian.litkey@nokia.com> - 0.0.1
+- Initial build. Part of FEA#6701
