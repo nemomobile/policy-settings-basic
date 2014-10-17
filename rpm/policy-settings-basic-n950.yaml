@@ -13,7 +13,8 @@ Description: Precompiled basic MeeGo policy settings for the N950.
 Requires:
     - ohm >= 1.1.16
     - ohm-plugins-misc
-    - ohm-plugin-videoep
+# nemo n950 has moved to wayland, this is x11 specific
+#    - ohm-plugin-videoep
     - ohm-plugin-fmradio
     - ohm-plugin-dspep
     - ohm-plugins-dbus

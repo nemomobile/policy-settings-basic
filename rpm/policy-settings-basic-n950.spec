@@ -19,7 +19,8 @@ Source0:    %{name}-%{version}.tar.gz
 Source100:  policy-settings-basic-n950.yaml
 Requires:   ohm >= 1.1.16
 Requires:   ohm-plugins-misc
-Requires:   ohm-plugin-videoep
+#it is x11 specific, and n950 nemo has moved to Wayland
+#Requires:   ohm-plugin-videoep
 Requires:   ohm-plugin-fmradio
 Requires:   ohm-plugin-dspep
 Requires:   ohm-plugins-dbus
